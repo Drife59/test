@@ -1,0 +1,20 @@
+#keyboard{
+    padding-top: 30px;
+}
+
+#keyboard .keyboard_letter{
+    padding: 10px;
+    border: 1px solid black;
+    width: 18px;
+    display: inline-block;
+}
+
+#keyboard .keyboard_letter.wrongLetter{
+    color: white;
+    background-color: #d47b8b;
+}
+
+#keyboard .keyboard_letter.goodLetter{
+    color: white;
+    background-color: #88dbad; 
+}
