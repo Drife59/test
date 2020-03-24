@@ -31,9 +31,6 @@ class LoadSession extends React.Component {
 
     render() {
         let value = this.context;
-        console.info("Value.isUserLoggedIn: " + value.isUserLoggedIn());
-        console.info("Value.isUserInSession: " + value.isUserInSession());
-        console.info("Value.isUserLoadedInApp: " + value.isUserLoadedInApp());
 
         return (
             <div id="authent">

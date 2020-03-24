@@ -37,20 +37,20 @@ class App extends Component {
             <UserContext.Consumer>
             {value => 
             <div className="App" >
-                <h1> Bienvenu dans le programme de test user context </h1>
+                    <h1> Bienvenu dans le programme de test user context </h1>
 
-                <table >
-                    <tbody>
-                    <tr><td>User id:</td><td>{value.userid}</td></tr>
-                    <tr><td>User email:</td><td>{value.email}</td></tr>
-                    <tr><td>User token:</td><td>{value.token}</td></tr>
-                    <tr><td>User role:</td><td>{value.role}</td></tr>
-                    </tbody>
-                </table>
+                    <table >
+                        <tbody>
+                        <tr><td>User id:</td><td>{value.userid}</td></tr>
+                        <tr><td>User email:</td><td>{value.email}</td></tr>
+                        <tr><td>User token:</td><td>{value.token}</td></tr>
+                        <tr><td>User role:</td><td>{value.role}</td></tr>
+                        </tbody>
+                    </table>
 
-                <FormAuthent updateUserLoggedIn={this.updateUserLoggedIn}/>
-                <UpdatePassword/>
-                <LoadSession userLoggedIn={this.state.userLoggedIn} updateUserLoggedIn={this.updateUserLoggedIn}/>
+                    <FormAuthent />
+                    <UpdatePassword/>
+                    <LoadSession />
             </div>
             }
             </UserContext.Consumer>
