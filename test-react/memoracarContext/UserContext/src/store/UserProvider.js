@@ -149,7 +149,7 @@ class UserProvider extends Component {
     }
 
     // Authenticate a User against back-end
-    authenticate(email, password)  {
+    authenticate(email, password, setUserCallback)  {
         const finalApi = endpointBack + authenticateApi;
         console.log("Api: " + finalApi);
         console.log("trying to authenticate with " + email + " / " + password);
@@ -172,6 +172,7 @@ class UserProvider extends Component {
             */
            
             trueThis.saveSession(response.data);
+            setUserCallback(response.data.id, response.data.token);
         })
         .catch(function (error) {
             console.log(error);

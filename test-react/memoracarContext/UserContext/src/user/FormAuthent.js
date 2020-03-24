@@ -20,8 +20,9 @@ class FormAuthent extends React.Component {
         if (this.state.value !== undefined) {
             console.info('Try to authent with ' + this.state.email + " / " + this.state.password);
         }
-        // Call addArticle from Context
-        value.authenticate(this.state.email, this.state.password);
+        // Call authenticate from Context
+        // Add the setUser callback from App.js, to inform main app when the user is set
+        value.authenticate(this.state.email, this.state.password, this.props.setUser);
     }
 
     //In order to retain the current value in field text 

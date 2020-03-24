@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 // On importe la classe `UserProvider`
 import UserProvider from "./store/UserProvider";
 
+
 // UserProvider available for all App
 ReactDOM.render(<UserProvider> <App /> </UserProvider>, document.getElementById('root'));
 

@@ -38,7 +38,7 @@ class UserHome extends Component {
                             </tbody>
                         </table>
 
-                        <FormAuthent />
+                        <FormAuthent setUser={this.props.setUser}/>
                         <UpdatePassword/>
                         <LoadSession />
                     </div>
