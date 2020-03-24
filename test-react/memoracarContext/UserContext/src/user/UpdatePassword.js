@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { UserContext } from "./store/UserProvider";
+import { UserContext } from "../store/UserProvider";
 
 
 class UpdatePassword extends React.Component {

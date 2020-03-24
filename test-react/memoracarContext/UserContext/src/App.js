@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import FormAuthent from "./FormAuthent";
+import FormAuthent from "./user/FormAuthent";
 
 import { UserContext } from "./store/UserProvider";
-import UpdatePassword from './UpdatePassword';
-import LoadSession from './LoadSession';
+import UpdatePassword from './user/UpdatePassword';
+import LoadSession from './user/LoadSession';
 
 
 class App extends Component {
