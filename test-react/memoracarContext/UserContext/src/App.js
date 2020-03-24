@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import FormAuthent from "./user/FormAuthent";
 
 import { UserContext } from "./store/UserProvider";
-import UpdatePassword from './user/UpdatePassword';
-import LoadSession from './user/LoadSession';
+import UserHome from './user/Home';
 
 
 class App extends Component {
@@ -37,20 +35,7 @@ class App extends Component {
             <UserContext.Consumer>
             {value => 
             <div className="App" >
-                    <h1> Bienvenu dans le programme de test user context </h1>
-
-                    <table >
-                        <tbody>
-                        <tr><td>User id:</td><td>{value.userid}</td></tr>
-                        <tr><td>User email:</td><td>{value.email}</td></tr>
-                        <tr><td>User token:</td><td>{value.token}</td></tr>
-                        <tr><td>User role:</td><td>{value.role}</td></tr>
-                        </tbody>
-                    </table>
-
-                    <FormAuthent />
-                    <UpdatePassword/>
-                    <LoadSession />
+                <UserHome />
             </div>
             }
             </UserContext.Consumer>
