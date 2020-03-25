@@ -31,14 +31,13 @@ class UserHome extends Component {
                     <div style={{display: this.state.showUserHome ? 'block' : 'none' }} >
                         <table >
                             <tbody>
-                            <tr><td>User id:</td><td>{value.userid}</td></tr>
+                            <tr><td>User id:</td><td>{value.userId}</td></tr>
                             <tr><td>User email:</td><td>{value.email}</td></tr>
                             <tr><td>User token:</td><td>{value.token}</td></tr>
                             <tr><td>User role:</td><td>{value.role}</td></tr>
                             </tbody>
                         </table>
-
-                        <FormAuthent setUser={this.props.setUser}/>
+                        <FormAuthent />
                         <UpdatePassword/>
                         <LoadSession />
                     </div>
@@ -52,3 +51,5 @@ class UserHome extends Component {
 UserHome.contextType = UserContext; 
 
 export default UserHome;
+
+//

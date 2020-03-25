@@ -2,13 +2,16 @@ import React from 'react'
 
 import { UserContext } from "../store/UserProvider";
 
+import UserSession from './UserSession';
+
 
 class LoadSession extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {sessionAvailable: UserSession.isUserInSession()};
         this.handleSessionLoad = this.handleSessionLoad.bind(this);
         this.handleSessionClear = this.handleSessionClear.bind(this);
+        this.handlecheckSession = this.handlecheckSession.bind(this);
     }
 
     //will call parent App to add article in global main state
@@ -17,16 +20,20 @@ class LoadSession extends React.Component {
         let value = this.context;
 
         // Load the session from local storage
-        value.loadSession();
+        UserSession.loadSession(value.setUser);
     }
 
     //will call parent App to add article in global main state
     handleSessionClear() {
-        //Get value exposed by Context
-        let value = this.context;
+        //We modify the state only the re-render the component when clicking on button clear
+        this.setState({
+            sessionAvailable: false
+        })
+        UserSession.clearSession();
+    }
 
-        // Load the session from local storage
-        value.clearSession();
+    handlecheckSession(){
+        this.forceUpdate();
     }
 
     render() {
@@ -37,17 +44,18 @@ class LoadSession extends React.Component {
                 <h2> Chargement de la session utilisateur</h2>
                 
                 <p> Présence d'une session à charger: {
-                    value.isUserInSession() && <span>OUI</span>
+                    UserSession.isUserInSession() && <span>OUI</span>
                 }    
                 {
-                    !value.isUserInSession() && <span>NON</span>
+                    !UserSession.isUserInSession() && <span>NON</span>
                 }
                 </p>
+                <div> <button onClick={this.handlecheckSession}> Check session </button> </div>
                 <p> Présence de l'utilisateur chargé dans l'app: {
-                    value.isUserLoadedInApp() && <span>OUI</span>
+                    value.userId !== -1 && <span>OUI</span>
                 }    
                 {
-                    !value.isUserLoadedInApp() && <span>NON</span>
+                    value.userId === -1 && <span>NON</span>
                 }
                 </p>
                 <button onClick={this.handleSessionLoad} > Charger la session </button>

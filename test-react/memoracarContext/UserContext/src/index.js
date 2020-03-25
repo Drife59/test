@@ -4,12 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// On importe la classe `UserProvider`
-import UserProvider from "./store/UserProvider";
-
 
 // UserProvider available for all App
-ReactDOM.render(<UserProvider> <App /> </UserProvider>, document.getElementById('root'));
+ReactDOM.render( <App/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

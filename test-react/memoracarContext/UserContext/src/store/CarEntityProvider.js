@@ -46,7 +46,6 @@ export const CarEntityContext = createContext({
     token: "",
     carSelected: {},
     carsAvailable: [],
-    setUser: () => {}
 });
 
 class CarEntityProvider extends Component {
@@ -56,34 +55,19 @@ class CarEntityProvider extends Component {
 
         // Bind manually all needed method
         // This need to be done BEFORE this.state init
-        this.authenticate = this.authenticate.bind(this);
-        this.setUser = this.setUser.bind(this);
-
+        //this.setUser = this.setUser.bind(this);
 
         this.state = {
             userId: -1,
             token: "",
             carSelected: {},
             carsAvailable: [],
-            authenticate: this.authenticate,
-            setUser: this.setUser
         }
-    }
-
-    setUser(userId, token){
-        this.setState({
-            userId: userId,
-            token: token
-        })
-        console.info("[CarEntityProvider] Set user: " + userId + " / " + token);
     }
 
     render() {
         return (
-            /**
-             * la propriété value est très importante ici, elle rend
-             * le contenu du state disponible aux `Consumers` de l'application
-             */
+
             <CarEntityContext.Provider value={this.state} >
                 {this.props.children}
             </CarEntityContext.Provider>

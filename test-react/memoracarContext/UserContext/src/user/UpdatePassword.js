@@ -1,5 +1,7 @@
 import React from 'react'
 
+import UserApi from "./UserApi";
+
 import { UserContext } from "../store/UserProvider";
 
 
@@ -15,9 +17,7 @@ class UpdatePassword extends React.Component {
     handleSubmit() {
         //Get value exposed by Context
         let value = this.context;
-
-        // Call addArticle from Context
-        value.updatePassword(this.state.password);
+        UserApi.updatePassword(value.token, value.userId, this.state.password);
     }
 
     updatePassword(evt) {

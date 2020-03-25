@@ -2,6 +2,8 @@ import React from 'react'
 
 import { UserContext } from "../store/UserProvider";
 
+import UserApi from "./UserApi";
+
 
 class FormAuthent extends React.Component {
     constructor(props) {
@@ -20,9 +22,10 @@ class FormAuthent extends React.Component {
         if (this.state.value !== undefined) {
             console.info('Try to authent with ' + this.state.email + " / " + this.state.password);
         }
-        // Call authenticate from Context
-        // Add the setUser callback from App.js, to inform main app when the user is set
-        value.authenticate(this.state.email, this.state.password, this.props.setUser);
+
+        // Call authenticate from dedicated UserApi Object
+        // Add the setUser callback from App.js, to inform main app when the user is set and update main Context
+        UserApi.authenticate(this.state.email, this.state.password, value.setUser);
     }
 
     //In order to retain the current value in field text 
