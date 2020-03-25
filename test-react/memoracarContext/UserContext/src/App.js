@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
-//import CarEntityProvider, { CarEntityContext } from "./store/CarEntityProvider";
 import { UserContext } from "./store/UserProvider";
+import { CarEntityContext } from "./store/CarEntityProvider";
+
 
 import UserHome from './user/Home';
 
@@ -45,6 +46,7 @@ class App extends Component {
             <div className="App" >
                 <UserContext.Provider value={this.state}>
                     <UserHome/>
+                    <
                 </UserContext.Provider>
             </div>
         );
