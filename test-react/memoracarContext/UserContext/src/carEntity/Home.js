@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { UserContext } from "../store/UserProvider";
 
+import CarSelected from "./CarSelected";
+
 
 class CarEntityHome extends Component {
     constructor(props) {
@@ -20,23 +22,12 @@ class CarEntityHome extends Component {
     render() {
         
         return (
-            <UserContext.Consumer>
-            {value => 
-            <div id="homeUser" >
-                    <h1 onClick={this.toggleUserDisplay}> user context section </h1>
+            <div id="homeCarEntity" >
+                    <h1 onClick={this.toggleUserDisplay}> Car entity section </h1>
                     <div style={{display: this.state.showCarEntityHome ? 'block' : 'none' }} >
-                        <table >
-                            <tbody>
-                            <tr><td>User id:</td><td>{value.userId}</td></tr>
-                            <tr><td>User email:</td><td>{value.email}</td></tr>
-                            <tr><td>User token:</td><td>{value.token}</td></tr>
-                            <tr><td>User role:</td><td>{value.role}</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <CarSelected/>
+                    </div>    
             </div>
-            }
-            </UserContext.Consumer>
         );
     }
 }
@@ -44,3 +35,14 @@ class CarEntityHome extends Component {
 CarEntityHome.contextType = UserContext; 
 
 export default CarEntityHome;
+
+/*
+<CarEntityContext.Consumer>
+                        {valueCE => 
+                             (valueCE !== null && valueCE.carSelected !== null) &&
+                            <p> Car selected | id {valueCE.carSelected.carEntityId} / {valueCE.carSelected.mileage} km <br/>
+                                Car model id: {valueCE.carSelected.carModel.carModelId}
+                            </p>
+                        }
+                    </CarEntityContext.Consumer>
+                    */
