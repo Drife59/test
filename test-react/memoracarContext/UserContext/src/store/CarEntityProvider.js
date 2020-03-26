@@ -33,11 +33,45 @@ The car entity model is like below:
     }
 }
 
+{
+  carSelected:
+  { 
+    "carEntityId": 6,
+      "mileage": 100000,
+      "immatriculationDate": "2020-05-01T00:00:00",
+      "vin": "VIN-cF95ew0cp0ZhxE=w",
+      "licencePlate": "GR-999-RT"
+      "carModel": {
+          "carModelId": 2,
+          "brand": "Fiat",
+          "model": "Tipo",
+          "motor": "1.7D",
+      }
+  }
+  carsAvailable: [
+    { 
+      <list of car like car selected>
+    }
+  ]
+    
+}
+
 */
 
 export const CarEntityContext = createContext({
-    userId:-1,
-    token: "",
-    carSelected: {},
-    carsAvailable: [],
+    carSelected: {
+        carEntityId: -1,
+        mileage: -1,
+        immatriculationDate: "",
+        vin: "",
+        licencePlate: "",
+        carModel: {
+            carModelId: -1,
+            brand: "",
+            model: "",
+            motor: ""
+        }
+    },
+    carModel: {},
+    carsAvailable: []
 });
