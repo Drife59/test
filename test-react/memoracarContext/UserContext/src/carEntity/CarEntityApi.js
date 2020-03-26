@@ -15,7 +15,7 @@ const axios = require('axios');
 //Define endpoint
 
 // This will be in conf later
-const endpointBack = "https://localhost:5001";
+const endpointBack = "https://localhost:5001/";
 
 const getSingleCarAPI = "user/{userId}/carEntity/{carEntityId}";
 const getAllCarsAPI = "user/{userId}/carEntitys";
@@ -23,20 +23,23 @@ const getAllCarsAPI = "user/{userId}/carEntitys";
 var CarEntityApi = {
 
     // Get all car entity and set the first one as Car selected
-    getCarEntitys(token, userId){
+    getCarEntitys(token, userId, callbackSetCarEntity){
         var finalApi = endpointBack + getAllCarsAPI;
-        finalApi = finalApi.replace("userId", userId);
+        finalApi = finalApi.replace("{userId}", userId);
         console.log("[CarEntityApi]/[getCarEntitys] Api: " + finalApi);
 
         const finalToken = "Bearer " + token;
 
         axios({
-            method: 'post',
+            method: 'get',
             url: finalApi,
             headers: { 'Authorization': finalToken },
         })
             .then(function (response) {
-                console.log(response);
+                let carSelected = response.data[0];
+                console.log("[CarEntityApi] / [getCarEntitys] Car selected: " + JSON.stringify(carSelected, null,4));
+                let carAvailable = response.data;
+                callbackSetCarEntity(carSelected, carAvailable);
             })
             .catch(function (error) {
                 console.log(error);

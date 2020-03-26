@@ -9,8 +9,11 @@ Define as static object / function the API entry point needed to manager User.
 All API file need to be agnostic from token, userId and others parameters.
 These parameters must be provided by stateful components. 
 */
+import CarEntityApi from "../carEntity/CarEntityApi";
+
 
 const axios = require('axios');
+
 
 //Define endpoint
 
@@ -23,7 +26,7 @@ var UserApi = {
     // Authenticate a User against back-end, getting token
     // This function accept a clallback, which is to set in main UserContext
     // the user returned by API
-    authenticate: function (email, password, setUserCallback) {
+    authenticate: function (email, password, setUserCallback, setCarEntityCallback) {
         const finalApi = endpointBack + authenticateApi;
         console.log("[UserApi]/[authenticate] Api: " + finalApi);
 
@@ -33,6 +36,11 @@ var UserApi = {
         })
             .then(function (response) {
                 setUserCallback(response.data.id, response.data.token, response.data.email, response.data.role);
+
+                console.info("[FormAuthent] / [handleSubmit] After authent, try to load car: " + 
+                response.data.id + " / " + response.data.token);
+                // setCarEntity as a callback to set in Context the car entity
+                CarEntityApi.getCarEntitys(response.data.token, response.data.id, setCarEntityCallback);
             })
             .catch(function (error) {
                 console.log("[UserApi]/[authenticate] " + error);
