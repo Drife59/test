@@ -21,7 +21,7 @@ var UserSession = {
             email: email,
             role: role
         };
-        console.log("[UserSession]/[saveSession] Saving user: " + JSON.stringify(dataToSave, null, 4));
+        console.debug("[UserSession]/[saveSession] Saving user: " + JSON.stringify(dataToSave, null, 4));
 
         // Clear old data for sure
         localStorage.removeItem(USERSESSION);
@@ -37,13 +37,13 @@ var UserSession = {
         }
 
         let userSession = JSON.parse(localStorage.getItem(USERSESSION));
-        console.log("[UserSession]/[loadSession] Loading user: " + JSON.stringify(userSession, null, 4));
+        console.debug("[UserSession]/[loadSession] Loading user: " + JSON.stringify(userSession, null, 4));
         setUserCallback(userSession.userId, userSession.token, userSession.email, userSession.role);
         return true;
     },
 
     clearSession: function () {
-        console.log("[UserSession]/[clearSession] Clear session user");
+        console.debug("[UserSession]/[clearSession] Clear session user");
         // Clear old data for sure
         localStorage.removeItem(USERSESSION);
     },
