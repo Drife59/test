@@ -5,6 +5,8 @@ import { UserContext } from "../store/UserProvider";
 import CarSelected from "./CarSelected";
 import CarAvailable from "./CarAvailable";
 
+import CarEntitySession from "./CarEntitySession";
+
 
 class CarEntityHome extends Component {
     constructor(props) {
@@ -18,6 +20,11 @@ class CarEntityHome extends Component {
         this.setState({
             showCarEntityHome: !this.state.showCarEntityHome
         });
+    }
+
+    UNSAFE_componentWillMount(){
+        let value = this.context;
+        CarEntitySession.loadSession(value.setCarEntity);
     }
 
     render() {
