@@ -10,6 +10,7 @@ import CarEntityHome from './carEntity/Home';
 
 
 import UserSession from './user/UserSession';
+import CarEntitySession from './carEntity/CarEntitySession';
 
 
 class App extends Component {
@@ -42,13 +43,41 @@ class App extends Component {
             })
         }
 
-        this.setCarEntity = (carSelected, carsAvailable) => {
+        // Set all car available for user in system
+        this.setCarEntity = (carSelected, carsAvailable, skipSession) => {
+
+            console.info("[App] / [setCarEntity] : " + JSON.stringify(carSelected, null, 4));
             this.setState({
                 carEntity: {
                     carSelected: carSelected,
                     carsAvailable: carsAvailable,
                 }
-            })
+            },
+            () => {
+                // default, save session
+                if(!skipSession){
+                    CarEntitySession.saveSession(this.state.carEntity);
+                }
+            });  
+        }
+
+        // Select the car with carEntity id and set it in state which will update Context
+        this.selectCar = (event) => {
+            const carSelectId = parseInt(event.target.value);
+
+            let carSelected = this.state.carEntity.carsAvailable.filter(function(car) {
+                return car["carEntityId"] === carSelectId;
+            });
+
+            //Only the matching result is now present in list, extract it
+            carSelected = carSelected[0];
+              
+            let newCarEntity = this.state.carEntity;
+            newCarEntity["carSelected"] = carSelected;
+            
+            this.setState({
+                carEntity: newCarEntity
+            });
         }
 
         this.state = {
@@ -63,7 +92,8 @@ class App extends Component {
                 },
                 carsAvailable: [],
             },  
-            setCarEntity: this.setCarEntity
+            setCarEntity: this.setCarEntity,
+            selectCar: this.selectCar
         };
     }
 
@@ -75,7 +105,8 @@ class App extends Component {
                     <UserHome/>
                     <CarEntityContext.Provider value={{
                             carSelected: this.state.carEntity.carSelected,
-                            carsAvailable: this.state.carEntity.carsAvailable
+                            carsAvailable: this.state.carEntity.carsAvailable,
+                            selectCar: this.state.selectCar
                         }} >
                         <CarEntityHome/>
                     </CarEntityContext.Provider>
