@@ -4,11 +4,10 @@ import { useContext } from 'react';
 import { CarEntityContext } from "../store/CarEntityProvider";
 
 function CarSelected({}) {
-    const carEntity = useContext(CarEntityContext);
-    const carSelected = carEntity.carSelected;
+    const carSelected = useContext(CarEntityContext).carSelected;
 
-    return <p> Car selected | id {carEntity.carSelected.carEntityId} / {carEntity.carSelected.mileage} km / {carEntity.carSelected.licencePlate} <br/>
-            Car model id: {carEntity.carSelected.carModel.carModelId} : {carEntity.carSelected.carModel.brand} {carSelected.carModel.model}
+    return <p> Car selected | id {carSelected.carEntityId} / {carSelected.mileage} km / {carSelected.licencePlate} <br/>
+            Car model id: {carSelected.carModel.carModelId} : {carSelected.carModel.brand} {carSelected.carModel.model}
             </p>
 }
 
