@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { UserContext } from "../store/UserProvider";
 
 import CarSelected from "./CarSelected";
+import CarAvailable from "./CarAvailable";
 
 
 class CarEntityHome extends Component {
@@ -26,6 +27,7 @@ class CarEntityHome extends Component {
                     <h1 onClick={this.toggleUserDisplay}> Car entity section </h1>
                     <div style={{display: this.state.showCarEntityHome ? 'block' : 'none' }} >
                         <CarSelected/>
+                        <CarAvailable/>
                     </div>    
             </div>
         );
