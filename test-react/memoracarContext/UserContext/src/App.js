@@ -6,6 +6,8 @@ import { CarEntityContext } from "./store/CarEntityProvider";
 
 
 import UserHome from './user/Home';
+import CarEntityHome from './carEntity/Home';
+
 
 import UserSession from './user/UserSession';
 
@@ -23,11 +25,29 @@ class App extends Component {
             // and the indicator to say "YES"
             UserSession.saveSession(userId, token, email, role);
 
+            //WARNING: we MUST init the carEntity car, with embedded carModel prop
+            // If not, render will fail because it will occur  when the carEntity var is
+            // not loaded from API, and we will try to access to carEntity.carSelected.carModel which does not exists
             this.setState({
                 userId: userId,
                 token: token,
                 email: email,
-                role: role
+                role: role,
+                carEntity: {
+                    carSelected: {
+                        carModel: {}
+                    },
+                    carsAvailable: []
+                }
+            })
+        }
+
+        this.setCarEntity = (carSelected, carsAvailable) => {
+            this.setState({
+                carEntity: {
+                    carSelected: carSelected,
+                    carsAvailable: carsAvailable,
+                }
             })
         }
 
@@ -36,7 +56,14 @@ class App extends Component {
             token: "NO-TOKEN",
             email: "NO-EMAIL",
             role: "NO-ROLE",
-            setUser: this.setUser
+            setUser: this.setUser,
+            carEntity: {
+                carSelected: {
+                    carModel: {}
+                },
+                carsAvailable: [],
+            },  
+            setCarEntity: this.setCarEntity
         };
     }
 
@@ -46,7 +73,12 @@ class App extends Component {
             <div className="App" >
                 <UserContext.Provider value={this.state}>
                     <UserHome/>
-                    <
+                    <CarEntityContext.Provider value={{
+                            carSelected: this.state.carEntity.carSelected,
+                            carsAvailable: this.state.carsAvailable
+                        }} >
+                        <CarEntityHome/>
+                    </CarEntityContext.Provider>
                 </UserContext.Provider>
             </div>
         );
