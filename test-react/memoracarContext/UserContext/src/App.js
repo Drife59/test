@@ -75,7 +75,7 @@ class App extends Component {
                     <UserHome/>
                     <CarEntityContext.Provider value={{
                             carSelected: this.state.carEntity.carSelected,
-                            carsAvailable: this.state.carsAvailable
+                            carsAvailable: this.state.carEntity.carsAvailable
                         }} >
                         <CarEntityHome/>
                     </CarEntityContext.Provider>
