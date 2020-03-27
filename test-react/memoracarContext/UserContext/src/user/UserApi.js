@@ -36,9 +36,6 @@ var UserApi = {
         })
             .then(function (response) {
                 setUserCallback(response.data.id, response.data.token, response.data.email, response.data.role);
-
-                console.info("[FormAuthent] / [handleSubmit] After authent, try to load car: " + 
-                response.data.id + " / " + response.data.token);
                 // setCarEntity as a callback to set in Context the car entity
                 CarEntityApi.getCarEntitys(response.data.token, response.data.id, setCarEntityCallback);
             })
