@@ -11,6 +11,9 @@ import CarEntityHome from './carEntity/Home';
 
 import UserSession from './user/UserSession';
 import CarEntitySession from './carEntity/CarEntitySession';
+import RepairHome from './Repair/Home';
+
+import * as CONST from './const';
 
 
 class App extends Component {
@@ -81,10 +84,10 @@ class App extends Component {
         }
 
         this.state = {
-            userId: -1,
-            token: "NO-TOKEN",
-            email: "NO-EMAIL",
-            role: "NO-ROLE",
+            userId: CONST.NOUSER,
+            token: CONST.NOTOKEN,
+            email: CONST.NOEMAIL,
+            role: CONST.NOROLE,
             setUser: this.setUser,
             carEntity: {
                 carSelected: {
@@ -110,6 +113,7 @@ class App extends Component {
                         }} >
                         <CarEntityHome/>
                     </CarEntityContext.Provider>
+                    <RepairHome/>
                 </UserContext.Provider>
             </div>
         );
