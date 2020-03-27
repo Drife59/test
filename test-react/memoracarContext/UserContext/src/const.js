@@ -13,3 +13,5 @@ export const NOEMAIL = "NO-EMAIL";
 export const NOUSER = -1;
 export const NOROLE = "NO-ROLE";
 export const DEFAULTROLE = "User";
+
+export const ALLFAMILY = ["engine", "tires", "chassis", "electrical", "exhaust", "brakes", "technical control", "body"];
