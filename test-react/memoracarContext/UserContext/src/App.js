@@ -112,8 +112,8 @@ class App extends Component {
                             selectCar: this.state.selectCar
                         }} >
                         <CarEntityHome/>
+                        <RepairHome/>
                     </CarEntityContext.Provider>
-                    <RepairHome/>
                 </UserContext.Provider>
             </div>
         );

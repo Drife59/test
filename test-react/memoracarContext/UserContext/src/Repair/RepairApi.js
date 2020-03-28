@@ -18,6 +18,7 @@ const axios = require('axios');
 const endpointBack = "https://localhost:5001/";
 
 const getAllRepairAPI = "repairs";
+const addRepairDoneAPI = "repairDone/user/{userId}/carEntity/{carEntityId}"
 
 var Repair = {
 
@@ -40,7 +41,33 @@ var Repair = {
             .catch(function (error) {
                 console.log(error);
             });
+    },
+
+    addRepairDone(token, userId, carEntityId, data){
+        var finalApi = endpointBack + addRepairDoneAPI;
+        finalApi = finalApi.replace("{userId}", userId);
+        finalApi = finalApi.replace("{carEntityId}", carEntityId);
+
+        console.debug("[Repair]/[addRepairDone] Api: " + finalApi);
+
+        const finalToken = "Bearer " + token;
+
+        axios({
+            method: 'post',
+            url: finalApi,
+            headers: { 'Authorization': finalToken },
+            data: data
+        })
+            .then(function (response) {
+                console.log("[Repair] / [addRepairDone] Add repair done successfull.");
+                //callbackSetRepair(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
+
+
 };
 
 export default Repair;

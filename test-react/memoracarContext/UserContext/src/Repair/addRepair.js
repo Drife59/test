@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
-//import { useContext } from 'react';
+import React, { useState, useEffect } from 'react'
 
 import { ALLFAMILY } from "../const";
 
-function AddRepair({allRepair}) {
-    const [repairId, setRepair] = useState();
+function AddRepair({allRepair, addRepairDone}) {
+    const [repairId, setRepair] = useState(-1);
     const [family, setFamily] = useState("all");
-    const [date, setDate] = useState("01/01/2020");
-    const [mileage, setMileage] = useState("151000");
+    const [date, setDate] = useState("10/10/1989");
+    const [mileage, setMileage] = useState("100000");
+
+    // We set to set the defaut repairId as the first one.
+    // If we don't do that and user don't touch the list of repair, 
+    // the repairId will still be -1
+    useEffect(() => {
+        // For the first rendering, the allRepair could be not defined
+        if(allRepair[0] !== undefined){
+            setRepair(allRepair[0].repairId);
+        }
+    });
 
     const allFamily = ["all"].concat(ALLFAMILY);
 
@@ -17,16 +26,22 @@ function AddRepair({allRepair}) {
             </option>
         );
 
-    console.info("All repair: " + allRepair.length);
-    let repairFiltered = allRepair.filter(repair => repair.mainCategory === family || family === "all");
-    console.log("repair filtered: " + JSON.stringify(repairFiltered, null, 4));
-
     const listRepair = allRepair.filter(repair => repair.mainCategory === family || family === "all")
             .map((repair) =>
                 <option key={repair.repairId} value={repair.repairId}>
                     {repair.repairFixedId} {repair.mainCategory} {repair.description}
                 </option>
         );
+
+    const handleSubmit = function(){
+        console.info("Repairid: " + repairId);
+        let data={
+            repairId: repairId.toString(),
+            reparationDate: date,
+            reparationMileage: parseInt(mileage)
+        }
+        addRepairDone(data);
+    }
 
     return <p>
             <label htmlFor="repair-select">Choisissez une réparation:</label>
@@ -42,8 +57,15 @@ function AddRepair({allRepair}) {
             id selected: {repairId}
             <br />
             family selected: {family}
-
             <br />
+
+            <label htmlFor="date-select">Date de réparation:</label>
+            <input id="date-select" type="text" onChange={ (e) => setDate(e.target.value)} value={date}/>
+
+            <label htmlFor="km-select">Km de réparation:</label>
+            <input id="date-select" type="text" onChange={ (e) => setMileage(e.target.value)} value={mileage}/>
+            <br />
+            <button onClick={handleSubmit}> Ajouter </button>
             </p>
 
 }
